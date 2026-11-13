@@ -1,0 +1,234 @@
+providers:
+  magpie:
+    api: openai-completions
+    auth: none
+    baseUrl: http://127.0.0.1:3425/v1
+    compat:
+      promptCacheSessionHeader: x-session-affinity
+    headers:
+      User-Agent: omp
+    models:
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.2
+          cacheWrite: 2.5
+          input: 2
+          output: 10
+        id: group/heavy
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: heavy · routing group
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1048576
+        cost:
+          cacheRead: 0.29879
+          cacheWrite: 0
+          input: 1.19516
+          output: 4.18306
+        id: group/light
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: light · routing group
+        reasoning: false
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.29879
+          cacheWrite: 0
+          input: 1.19516
+          output: 4.18306
+        id: group/balanced
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: balanced · routing group
+        reasoning: false
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.25
+          cacheWrite: 2.5
+          input: 2
+          output: 6
+        id: auto/qwen3.8-max
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: Qwen3.8 Max · routing group
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - medium
+            - xhigh
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.29879
+          cacheWrite: 0
+          input: 1.19516
+          output: 4.18306
+        id: 30/GLM-5.2
+        maxTokens: 131072
+        name: GLM-5.2 · 30
+        reasoning: true
+        thinking:
+          efforts:
+            - high
+            - max
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.25
+          cacheWrite: 2.5
+          input: 2
+          output: 6
+        id: 30/qwen3.8-max
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: Qwen3.8 Max · 30
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - medium
+            - xhigh
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1048576
+        cost:
+          cacheRead: 0.3
+          cacheWrite: 3
+          input: 3
+          output: 15
+        id: 30/Kimi-K3
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: Kimi-K3 · 30
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - high
+            - max
+          mode: effort
+      - api: openai-responses
+        id: 30/peach
+        name: peach · 30
+        reasoning: false
+      - api: openai-responses
+        contextWindow: 262144
+        cost:
+          cacheRead: 0.16
+          cacheWrite: 0
+          input: 0.95
+          output: 4
+        id: 30/kimi-k2.6
+        input:
+          - text
+          - image
+        maxTokens: 262144
+        name: Kimi K2.6 · 30
+        reasoning: false
+      - api: openai-responses
+        id: 30/glm5
+        name: glm5 · 30
+        reasoning: false
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.022
+          cacheWrite: 0
+          input: 0.66
+          output: 1.98
+        id: 30/deepseek-v4-pro
+        maxTokens: 384000
+        name: DeepSeek V4 Pro · 30
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - high
+            - max
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.29879
+          cacheWrite: 0
+          input: 1.19516
+          output: 4.18306
+        id: aone-responses/glm-5.3
+        maxTokens: 131072
+        name: GLM-5.3 · aone-responses
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - high
+            - max
+          mode: effort
+      - api: openai-responses
+        contextWindow: 1000000
+        cost:
+          cacheRead: 0.25
+          cacheWrite: 2.5
+          input: 2
+          output: 6
+        id: aone-responses/qwen3.8-max
+        input:
+          - text
+          - image
+        maxTokens: 131072
+        name: Qwen3.8 Max · aone-responses
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - medium
+            - xhigh
+          mode: effort
+      - api: openai-responses
+        contextWindow: 922000
+        cost:
+          cacheRead: 0.2
+          cacheWrite: 2.5
+          input: 2
+          output: 10
+        id: aone-responses/gpt-6-sol
+        input:
+          - text
+          - image
+        maxTokens: 128000
+        name: GPT-6 Sol · aone-responses
+        reasoning: true
+        thinking:
+          efforts:
+            - low
+            - medium
+            - high
+            - xhigh
+            - max
+          mode: effort
+      - api: openai-responses
+        id: tokenswitch/mode-6cce4e076c4146ad8ebfc0140efadf4e
+        name: mode-6cce4e076c4146ad8ebfc0140efadf4e · tokenswitch
+        reasoning: false

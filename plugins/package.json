@@ -1,0 +1,7 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "pi-market": "npm:pi-market@^0.1.3"
+  }
+}
