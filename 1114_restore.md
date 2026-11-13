@@ -10,6 +10,8 @@ This is a curated, Git-managed backup of **configuration**, not an archive of `~
 - `agent/managed-skills/`: nineteen installed skill definitions (`SKILL.md` files).
 - `profiles/tools-improve/agent/{config.yml,AGENTS.md}` and `profiles/ws/agent/AGENTS.md`: only profile configuration and instructions, no profile state.
 - `plugins/{package.json,omp-plugins.lock.json}`: pi-market plugin declaration and enablement. Dependencies are reinstalled separately; no `node_modules` or generated package lock is backed up.
+- `global/AGENTS.md`: the shared `~/AGENTS.md` global agent instructions.
+- `shared-skills/`: OMP-loaded shared skills kept as plain copies (`dogfooding`, `herdr`, `sync-skills`). Symlinked shared skills (`archify`, `dgf-pipeline`, `rzrq-leverage`, `short-term`, and app-bundled `ego-browser`) are restored as links to their source repositories; `archify` is a standalone Git repository under `~/.agents/skills` (upstream `MeloSydney/me1o-ccSkills`), cloned or copied there separately rather than vendored. `.migration-backup-20260909/` is stale and intentionally excluded.
 
 ## External dependencies
 
@@ -22,6 +24,9 @@ Set `SRC_SKILLS_ROOT` if your source repositories do not live under `~/src-skill
 | `agent/skills/duoyu-pipeline` | `src-zsxq/zsxq-quant/duoyu` |
 | `agent/skills/short-term` | `src-zsxq/zsxq-quant/short-term` |
 | `/agent-name` extension | `src-pi-agentname/scripts/sync.sh` |
+| `~/.agents/skills/archify` | existing `~/.agents/skills/archify` repo (clone of `MeloSydney/me1o-ccSkills`) |
+| `~/.agents/skills/rzrq-leverage` | `src-rzrq/me1o-rzrq` |
+| `~/.agents/skills/{dgf-pipeline,short-term}` | `src-zsxq/zsxq-quant/{dgf,short-term}` |
 
 The shell's `omp-heavy`/`omp-light` wrappers additionally need `magpie`, `omp`, and a separately installed `src-piconfig/magpie-up.sh` script. The local Magpie service and any authentication it requires must be provisioned separately. Other managed skills may describe host-specific Linux workspaces/tools, not included here.
 
@@ -40,7 +45,7 @@ omp-light() { magpie-up && magpie omp group/light && omp "$@"; }
 omp-ti() { command omp --profile=tools-improve "$@"; }
 ```
 
-The original `.zshrc` also has pi-specific aliases and personal settings; those are deliberately not copied. The source tree contains no custom `~/.omp/rules` or `~/.omp/prompts` files at inventory time. Project-specific OMP configuration outside `~/.omp` and OMP-managed built-in skills are not represented here.
+Global `~/AGENTS.md` and the three copied shared skills contain no credentials. `.agents/skills/.git` is managed by its own repository and not duplicated here.
 
 ## Deliberately excluded
 

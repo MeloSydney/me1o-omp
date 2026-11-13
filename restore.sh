@@ -31,6 +31,47 @@ for directory in agent/agents agent/extensions agent/managed-skills; do
   done
 done
 
+for relative in global/AGENTS.md \
+  shared-skills/dogfooding/SKILL.md shared-skills/herdr/SKILL.md \
+  shared-skills/sync-skills/SKILL.md; do
+  restore_global() {
+    source=$repo/$relative
+    target=
+    case $relative in
+      global/AGENTS.md) target=$HOME/AGENTS.md ;;
+      *) target=$HOME/.agents/skills/${relative#shared-skills/} ;;
+    esac
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      if [ -f "$target" ] && cmp -s "$source" "$target"; then continue; fi
+      printf 'Refusing to overwrite %s\n' "$target" >&2
+      exit 1
+    fi
+    mkdir -p "$(dirname "$target")"
+    cp -p "$source" "$target"
+    printf 'Restored %s\n' "$target"
+  }
+  restore_global
+done
+link_shared() {
+  name=$1
+  source=$2
+  target=$HOME/.agents/skills/$name
+  if [ ! -e "$source" ]; then
+    printf 'Missing external dependency: %s\n' "$source" >&2
+    exit 1
+  fi
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then return; fi
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    printf 'Refusing to overwrite %s\n' "$target" >&2
+    exit 1
+  fi
+  mkdir -p "$(dirname "$target")"
+  ln -s "$source" "$target"
+  printf 'Linked %s\n' "$target"
+}
+link_shared archify "$HOME/.agents/skills/archify"
+link_shared rzrq-leverage "$sources/src-rzrq/me1o-rzrq"
+
 link_external() {
   relative=$1
   source=$2
