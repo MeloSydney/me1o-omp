@@ -11,7 +11,7 @@ This is a curated, Git-managed backup of **configuration**, not an archive of `~
 - `profiles/tools-improve/agent/{config.yml,AGENTS.md}` and `profiles/ws/agent/AGENTS.md`: only profile configuration and instructions, no profile state.
 - `plugins/{package.json,omp-plugins.lock.json}`: pi-market plugin declaration and enablement. Dependencies are reinstalled separately; no `node_modules` or generated package lock is backed up.
 - `global/AGENTS.md`: the shared `~/AGENTS.md` global agent instructions.
-- `shared-skills/`: OMP-loaded shared skills kept as plain copies (`dogfooding`, `herdr`, `sync-skills`). Symlinked shared skills (`archify`, `dgf-pipeline`, `rzrq-leverage`, `short-term`, and app-bundled `ego-browser`) are restored as links to their source repositories; `archify` is a standalone Git repository under `~/.agents/skills` (upstream `MeloSydney/me1o-ccSkills`), cloned or copied there separately rather than vendored. `.migration-backup-20260909/` is stale and intentionally excluded.
+- `shared-skills/`: OMP-loaded shared skills kept as plain copies (`dogfooding`, `herdr`, `sync-skills`). Symlinked shared skills are restored as links to their source repositories: `dgf-pipeline`/`short-term` → `src-zsxq/zsxq-quant/{dgf,short-term}`, `rzrq-leverage` → `src-stockdata/rzrq-leverage`. `archify` is a standalone Git repository under `~/.agents/skills` (upstream `MeloSydney/me1o-ccSkills`): restore only checks for it and notes how to clone it; it is never linked or copied by the script. `ego-browser` links into app data (`~/.local/share/ego/ego-skills`) managed by the "ego lite" app and is not restored. `.migration-backup-20260909/` is stale and intentionally excluded.
 
 ## External dependencies
 
@@ -25,8 +25,7 @@ Set `SRC_SKILLS_ROOT` if your source repositories do not live under `~/src-skill
 | `agent/skills/short-term` | `src-zsxq/zsxq-quant/short-term` |
 | `/agent-name` extension | `src-pi-agentname/scripts/sync.sh` |
 | `~/.agents/skills/archify` | existing `~/.agents/skills/archify` repo (clone of `MeloSydney/me1o-ccSkills`) |
-| `~/.agents/skills/rzrq-leverage` | `src-rzrq/me1o-rzrq` |
-| `~/.agents/skills/{dgf-pipeline,short-term}` | `src-zsxq/zsxq-quant/{dgf,short-term}` |
+| `~/.agents/skills/rzrq-leverage` | `src-stockdata/rzrq-leverage` |
 
 The shell's `omp-heavy`/`omp-light` wrappers additionally need `magpie`, `omp`, and a separately installed `src-piconfig/magpie-up.sh` script. The local Magpie service and any authentication it requires must be provisioned separately. Other managed skills may describe host-specific Linux workspaces/tools, not included here.
 

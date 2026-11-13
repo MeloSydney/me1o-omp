@@ -69,8 +69,12 @@ link_shared() {
   ln -s "$source" "$target"
   printf 'Linked %s\n' "$target"
 }
-link_shared archify "$HOME/.agents/skills/archify"
-link_shared rzrq-leverage "$sources/src-rzrq/me1o-rzrq"
+if [ ! -e "$HOME/.agents/skills/archify" ]; then
+  printf 'Note: archify skill not found at ~/.agents/skills/archify; clone it there (MeloSydney/me1o-ccSkills) if needed.\n' >&2
+fi
+link_shared dgf-pipeline "$sources/src-zsxq/zsxq-quant/dgf"
+link_shared short-term "$sources/src-zsxq/zsxq-quant/short-term"
+link_shared rzrq-leverage "$sources/src-stockdata/rzrq-leverage"
 
 link_external() {
   relative=$1
